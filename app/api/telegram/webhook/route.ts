@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendMetaEvent } from "@/lib/meta";
 import { chatIds, leadKeyboard, parseLeadMessage, tg } from "@/lib/telegram";
-import { site } from "@/lib/site";
+import { baseUrl, makeLeadToken } from "@/lib/leadToken";
 
 export const runtime = "nodejs";
 
@@ -44,45 +43,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  const value = Number(process.env.META_PURCHASE_VALUE || 0);
-  const currency = process.env.META_CURRENCY || "UZS";
+  // Eski "callback" tugmali xabarlar: tugma summa kiritish sahifasiga ochiladigan URL tugmaga almashtiriladi.
   const phone = lead.phone.replace(/\D/g, "");
-
-  const res = await sendMetaEvent({
-    eventName: "Purchase",
-    // Lid bo'yicha barqaror ID — tugma ikki marta bosilsa ham Meta takrorni o'chiradi.
-    eventId: `purchase_${lead.id}`,
-    sourceUrl: lead.url || site.url,
-    user: {
-      phone,
-      name: lead.name,
-      externalId: phone,
-      ip: lead.ip,
-      userAgent: lead.ua,
-      fbp: lead.fbp,
-      fbc: lead.fbc,
-    },
-    customData: { currency, value, content_name: "Safo Asallari buyurtma" },
+  const siteUrl = baseUrl(req);
+  const token = makeLeadToken({
+    id: lead.id,
+    t: lead.t,
+    url: lead.url,
+    user: { phone, name: lead.name, externalId: phone, ip: lead.ip, userAgent: lead.ua, fbp: lead.fbp, fbc: lead.fbc },
+    name: lead.name,
+    phone,
+    tg: { c: String(cq.message.chat.id), m: cq.message.message_id },
   });
-
-  if (!res.ok) {
-    await answer(cq.id, `Xatolik: ${res.error}`.slice(0, 190), true);
-    return NextResponse.json({ ok: true });
-  }
-
-  const who = cq.from.username ? `@${cq.from.username}` : cq.from.first_name || "operator";
-  await Promise.allSettled([
-    tg("editMessageReplyMarkup", {
-      chat_id: cq.message.chat.id,
-      message_id: cq.message.message_id,
-      reply_markup: leadKeyboard(site.url, phone, true),
-    }),
-    tg("sendMessage", {
-      chat_id: cq.message.chat.id,
-      reply_parameters: { message_id: cq.message.message_id },
-      text: `✅ Purchase Metaga yuborildi (${value.toLocaleString("ru-RU")} ${currency}) — ${who}`,
-    }),
-  ]);
-  await answer(cq.id, "Metaga yuborildi ✅");
+  await tg("editMessageReplyMarkup", {
+    chat_id: cq.message.chat.id,
+    message_id: cq.message.message_id,
+    reply_markup: leadKeyboard(siteUrl, phone, false, `${siteUrl}/sotuv?t=${token}`),
+  }).catch((e) => console.error("[webhook]", e));
+  await answer(cq.id, "Endi \"Sotib oldi → summa kiritish\" tugmasini bosing", true);
   return NextResponse.json({ ok: true });
 }
