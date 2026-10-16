@@ -1,7 +1,7 @@
 // Saytdagi barcha matn va kontaktlar shu yerda — o'zgartirish oson bo'lsin uchun.
 
 export const site = {
-  name: "Safo Asallari",
+  name: "Сафо Асаллари",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   phone: process.env.NEXT_PUBLIC_PHONE || "+998901234567",
   telegram: process.env.NEXT_PUBLIC_TELEGRAM_USERNAME || "Safoasallari",
@@ -21,51 +21,47 @@ export function formatPhone(raw: string) {
 export const benefits = [
   {
     icon: "leaf",
-    title: "100% tabiiy",
-    text: "Shakar, sirop yoki qo'shimchasiz. Faqat ari va tabiat.",
+    title: "100% табиий",
+    text: "Шакар, сироп ёки қўшимчасиз. Фақат ари ва табиат.",
   },
   {
     icon: "shield",
-    title: "Sifat kafolati",
-    text: "Asal yoqmasa yoki tabiiy bo'lmasa — pulingizni to'liq qaytaramiz.",
+    title: "Сифат кафолати",
+    text: "Асал ёқмаса ёки табиий бўлмаса — пулингизни тўлиқ қайтарамиз.",
   },
   {
     icon: "truck",
-    title: "Butun O'zbekistonga",
-    text: "Toshkentdan Nukusgacha — har bir viloyatga yetkazib beramiz.",
+    title: "Бутун Ўзбекистонга",
+    text: "Тошкентдан Нукусгача — ҳар бир вилоятга етказиб берамиз.",
   },
   {
     icon: "star",
-    title: "Noyob turlar",
-    text: "Bozorda topilmaydigan, kam uchraydigan asal navlari bizda bor.",
+    title: "Ноёб турлар",
+    text: "Бозорда топилмайдиган, кам учрайдиган асал навлари бизда бор.",
   },
 ];
 
 export const steps = [
-  { title: "Ariza qoldiring", text: "Ism, raqam va manzilingizni yozing — 30 soniya." },
-  { title: "Maslahat oling", text: "Mutaxassisimiz sizga mos asal turini tanlab beradi." },
-  { title: "Uyda qabul qiling", text: "Asal eshigingizgacha yetkaziladi, ko'rib to'laysiz." },
+  { title: "Ариза қолдиринг", text: "Исм, рақам ва манзилингизни ёзинг — 30 сония." },
+  { title: "Маслаҳат олинг", text: "Мутахассисимиз сизга мос асал турини танлаб беради." },
+  { title: "Уйда қабул қилинг", text: "Асал эшигингизгача етказилади ёки почта офисларидан олиб кетасиз." },
 ];
 
 export const faq = [
   {
-    q: "Asal tabiiy ekanini qanday bilaman?",
-    a: "Asallarimiz ishonchli asalarichilardan to'g'ridan-to'g'ri olinadi. Agar asal sizga tabiiy bo'lmagandek tuyulsa — pulingizni qaytaramiz.",
+    q: "Асал табиий эканини қандай биламан?",
+    a: "Асалларимиз ишончли асаларичилардан тўғридан-тўғри олинади. Агар асал сизга табиий бўлмагандек туюлса — пулингизни қайтарамиз.",
   },
   {
-    q: "Yetkazib berish qancha vaqt oladi?",
-    a: "Toshkent bo'ylab odatda 1 kun ichida, viloyatlarga 1–3 kun ichida yetkaziladi.",
+    q: "Етказиб бериш қанча вақт олади?",
+    a: "Тошкент бўйлаб одатда 1 кун ичида, вилоятларга 1–3 кун ичида етказилади.",
   },
   {
-    q: "To'lov qanday amalga oshiriladi?",
-    a: "Asalni qabul qilib olganingizdan so'ng naqd yoki karta orqali to'lashingiz mumkin.",
+    q: "Асал шакарланиб қолса, бу ёмонми?",
+    a: "Йўқ. Табиий асал вақт ўтиши билан кристалланади — бу унинг табиийлигининг белгиси. 40°C дан паст ҳароратда илиқ сувда юмшатишингиз мумкин.",
   },
   {
-    q: "Asal shakarlanib qolsa, bu yomonmi?",
-    a: "Yo'q. Tabiiy asal vaqt o'tishi bilan kristallanadi — bu uning tabiiyligining belgisi. 40°C dan past haroratda iliq suvda yumshatishingiz mumkin.",
-  },
-  {
-    q: "Qaysi asal turini tanlashni bilmayapman",
-    a: "Ariza qoldiring — mutaxassisimiz maqsadingizga (immunitet, bolalar uchun, sovg'a) qarab eng mosini tavsiya qiladi.",
+    q: "Қайси асал турини танлашни билмаяпман",
+    a: "Ариза қолдиринг — мутахассисимиз мақсадингизга (иммунитет, болалар учун, совға) қараб энг мосини тавсия қилади.",
   },
 ];

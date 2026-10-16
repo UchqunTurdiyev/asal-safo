@@ -1,7 +1,7 @@
 // Hero uchun dekorativ asal bankasi (SVG) — rasm kerak emas, har qanday ekranda tiniq.
 export default function HoneyJar() {
   return (
-    <svg className="jar" viewBox="0 0 320 400" role="img" aria-label="Safo Asallari — asal bankasi">
+    <svg className="jar" viewBox="0 0 320 400" role="img" aria-label="Сафо Асаллари — асал банкаси">
       <defs>
         <linearGradient id="honey" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#FFD27A" />
@@ -63,13 +63,13 @@ export default function HoneyJar() {
         <rect x="-92" y="-56" width="184" height="112" rx="16" fill="#FFF8EC" />
         <rect x="-84" y="-48" width="168" height="96" rx="11" fill="none" stroke="#C77A12" strokeWidth="1.5" strokeDasharray="3 4" />
         <text y="-14" textAnchor="middle" fontFamily="var(--font-serif)" fontSize="30" fontWeight="700" fill="#2E1A08">
-          Safo
+          Сафо
         </text>
         <text y="14" textAnchor="middle" fontFamily="var(--font-sans)" fontSize="13" letterSpacing="5" fontWeight="700" fill="#C77A12">
-          ASALLARI
+          АСАЛЛАРИ
         </text>
         <text y="36" textAnchor="middle" fontFamily="var(--font-sans)" fontSize="10" letterSpacing="1.5" fill="#6B4A28">
-          100% TABIIY
+          100% ТАБИИЙ
         </text>
       </g>
 

@@ -40,9 +40,9 @@ export default function Countdown({ seconds }: { seconds: number }) {
           {left}
         </span>
       </div>
-      <p className="countdown-note">soniyadan so&apos;ng Telegramga o&apos;tasiz</p>
+      <p className="countdown-note">сониядан сўнг Телеграмга ўтасиз</p>
       <a className="btn btn-primary btn-lg btn-block" href={telegramLink}>
-        Hozir Telegramga o&apos;tish
+        Ҳозир Телеграмга ўтиш
       </a>
     </div>
   );

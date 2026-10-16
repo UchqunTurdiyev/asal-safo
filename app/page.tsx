@@ -18,25 +18,25 @@ export default function Home() {
   return (
     <>
       <div className="topbar">
-        🚚 O&apos;zbekiston bo&apos;ylab yetkazib berish<span className="topbar-extra"> · Sifat kafolati · Ko&apos;rib to&apos;laysiz</span>
+        🚚 Ўзбекистон бўйлаб етказиб бериш<span className="topbar-extra"> · Сифат кафолати · Кўриб тўлайсиз</span>
       </div>
 
       <header className="header">
         <div className="container header-inner">
-          <a href="#" className="logo" aria-label="Safo Asallari">
+          <a href="#" className="logo" aria-label="Сафо Асаллари">
             <span className="logo-mark" aria-hidden>
               <svg viewBox="0 0 28 32" width="26" height="30">
                 <path d="M14 0 28 8v16l-14 8L0 24V8Z" fill="currentColor" />
               </svg>
             </span>
             <span>
-              Safo <em>Asallari</em>
+              Сафо <em>Асаллари</em>
             </span>
           </a>
           <nav className="nav">
-            <a href="#turlar">Asal turlari</a>
-            <a href="#nega-biz">Nega biz</a>
-            <a href="#savollar">Savollar</a>
+            <a href="#turlar">Асал турлари</a>
+            <a href="#nega-biz">Нега биз</a>
+            <a href="#savollar">Саволлар</a>
           </nav>
           <a href={phoneHref} className="btn btn-ghost header-call">
             <Icon name="phone" size={18} />
@@ -51,42 +51,42 @@ export default function Home() {
           <div className="hero-glow" aria-hidden />
           <div className="container hero-grid">
             <div className="hero-copy">
-              <span className="pill">🐝 Asalarichidan to&apos;g&apos;ridan-to&apos;g&apos;ri</span>
+              <span className="pill">🐝 Асаларичидан тўғридан-тўғри</span>
               <h1>
-                Shifobaxsh, <span className="gold">100% tabiiy</span> asal — oilangiz sog&apos;lig&apos;i uchun
+                Шифобахш, <span className="gold">100% табиий</span> асал — оилангиз соғлиғи учун
               </h1>
               <p className="lead">
-                Shakar, sirop va qo&apos;shimchasiz. Tog&apos; asalidan tortib bozorda topilmaydigan noyob turlargacha —
-                eshigingizgacha yetkazib beramiz.
+                Шакар, сироп ва қўшимчасиз. Тоғ асалидан тортиб бозорда топилмайдиган ноёб турларгача —
+                эшигингизгача етказиб берамиз.
               </p>
 
               <ul className="offer-list">
                 <li>
                   <Icon name="check" size={20} />
                   <span>
-                    <b>Kafolat:</b> tabiiy bo&apos;lmasa — pulingizni to&apos;liq qaytaramiz
+                    <b>Кафолат:</b> табиий бўлмаса — пулингизни тўлиқ қайтарамиз
                   </span>
                 </li>
                 <li>
                   <Icon name="check" size={20} />
                   <span>
-                    <b>Ko&apos;rib to&apos;laysiz:</b> avval asalni tatib ko&apos;ring
+                    <b>Кўриб тўлайсиз:</b> аввал асални татиб кўринг
                   </span>
                 </li>
                 <li>
                   <Icon name="check" size={20} />
                   <span>
-                    <b>Bepul maslahat:</b> sizga mos asalni tanlab beramiz
+                    <b>Бепул маслаҳат:</b> сизга мос асални танлаб берамиз
                   </span>
                 </li>
               </ul>
 
               <div className="hero-actions">
                 <a href={phoneHref} className="btn btn-dark btn-lg">
-                  <Icon name="phone" size={20} /> Qo&apos;ng&apos;iroq qilish
+                  <Icon name="phone" size={20} /> Қўнғироқ қилиш
                 </a>
                 <a href={telegramLink} className="btn btn-ghost btn-lg" target="_blank" rel="noopener">
-                  <Icon name="telegram" size={20} /> Telegram
+                  <Icon name="telegram" size={20} /> Телеграм
                 </a>
               </div>
             </div>
@@ -102,19 +102,19 @@ export default function Home() {
           <div className="container stats">
             <div>
               <b>100%</b>
-              <span>tabiiy mahsulot</span>
+              <span>табиий маҳсулот</span>
             </div>
             <div>
               <b>12</b>
-              <span>viloyatga yetkazish</span>
+              <span>вилоятга етказиш</span>
             </div>
             <div>
               <b>2 900+</b>
-              <span>Instagram obunachilari</span>
+              <span>Инстаграм обуначилари</span>
             </div>
             <div>
               <b>0</b>
-              <span>shakar va qo&apos;shimcha</span>
+              <span>шакар ва қўшимча</span>
             </div>
           </div>
         </section>
@@ -123,8 +123,8 @@ export default function Home() {
         <section className="section" id="nega-biz">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Nega Safo Asallari?</span>
-              <h2>Bozordagi asal bilan farqi — birinchi qoshiqdayoq seziladi</h2>
+              <span className="eyebrow">Нега Сафо Асаллари?</span>
+              <h2>Бозордаги асал билан фарқи — биринчи қошиқдаёқ сезилади</h2>
             </div>
             <div className="benefits">
               {benefits.map((b) => (
@@ -144,9 +144,9 @@ export default function Home() {
         <section className="section section-cream" id="turlar">
           <div className="container">
             <div className="section-head section-head-only">
-              <span className="eyebrow">Assortiment</span>
-              <h2>Har xil va noyob asal turlari</h2>
-              <p className="featured-honey">Qirg&apos;iziston shifobaxsh tog&apos; asali</p>
+              <span className="eyebrow">Ассортимент</span>
+              <h2>Ҳар хил ва ноёб асал турлари</h2>
+              <p className="featured-honey">Қирғизистон шифобахш тоғ асали</p>
             </div>
           </div>
         </section>
@@ -155,8 +155,8 @@ export default function Home() {
         <section className="section">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Juda oson</span>
-              <h2>3 qadamda asal uyingizda</h2>
+              <span className="eyebrow">Жуда осон</span>
+              <h2>3 қадамда асал уйингизда</h2>
             </div>
             <ol className="steps">
               {steps.map((s, i) => (
@@ -178,14 +178,14 @@ export default function Home() {
                 <Icon name="shield" size={54} />
               </div>
               <div>
-                <h2>Sifat kafolati — xavfsiz xarid</h2>
+                <h2>Сифат кафолати — хавфсиз харид</h2>
                 <p>
-                  Biz asalimizga ishonamiz. Agar asal sizga tabiiy bo&apos;lmagandek tuyulsa yoki yoqmasa — hech qanday
-                  savolsiz pulingizni qaytaramiz. Siz hech narsa yo&apos;qotmaysiz.
+                  Биз асалимизга ишонамиз. Агар асал сизга табиий бўлмагандек туюлса ёки ёқмаса — ҳеч қандай
+                  саволсиз пулингизни қайтарамиз. Сиз ҳеч нарса йўқотмайсиз.
                 </p>
               </div>
               <a href="#buyurtma" className="btn btn-primary btn-lg">
-                Buyurtma berish
+                Буюртма бериш
               </a>
             </div>
           </div>
@@ -195,8 +195,8 @@ export default function Home() {
         <section className="section section-cream" id="savollar">
           <div className="container narrow">
             <div className="section-head">
-              <span className="eyebrow">Savollar</span>
-              <h2>Ko&apos;p beriladigan savollar</h2>
+              <span className="eyebrow">Саволлар</span>
+              <h2>Кўп бериладиган саволлар</h2>
             </div>
             <div className="faq">
               {faq.map((f) => (
@@ -213,9 +213,9 @@ export default function Home() {
         <section className="final">
           <div className="container final-grid">
             <div>
-              <span className="eyebrow light">Kechiktirmang</span>
-              <h2>Tabiiy asal — eng yaxshi sovg&apos;a va eng arzon dori</h2>
-              <p>Ariza qoldiring, 15 daqiqada aloqaga chiqamiz va sizga mos asalni tanlab beramiz.</p>
+              <span className="eyebrow light">Кечиктирманг</span>
+              <h2>Табиий асал — энг яхши совға ва энг арзон дори</h2>
+              <p>Ариза қолдиринг — тез орада асал соҳасидаги мутахассисимиз сиз билан боғланиб, сизга мос асални танлаб беради.</p>
               <div className="hero-actions">
                 <a href={phoneHref} className="btn btn-primary btn-lg">
                   <Icon name="phone" size={20} /> {phoneLabel}
@@ -236,7 +236,7 @@ export default function Home() {
               </svg>
             </span>
             <span>
-              Safo <em>Asallari</em>
+              Сафо <em>Асаллари</em>
             </span>
           </div>
           <div className="socials">
@@ -250,17 +250,17 @@ export default function Home() {
               <Icon name="phone" size={20} /> {phoneLabel}
             </a>
           </div>
-          <p className="copy">© {new Date().getFullYear()} Safo Asallari. Barcha huquqlar himoyalangan.</p>
+          <p className="copy">© {new Date().getFullYear()} Сафо Асаллари. Барча ҳуқуқлар ҳимояланган.</p>
         </div>
       </footer>
 
       {/* Mobil uchun pastki qotirilgan panel */}
       <div className="mobile-bar">
         <a href={phoneHref} className="btn btn-dark">
-          <Icon name="phone" size={18} /> Qo&apos;ng&apos;iroq
+          <Icon name="phone" size={18} /> Қўнғироқ
         </a>
         <a href="#buyurtma" className="btn btn-primary">
-          Buyurtma berish
+          Буюртма бериш
         </a>
       </div>
     </>

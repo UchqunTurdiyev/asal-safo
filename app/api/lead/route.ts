@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Noto'g'ri so'rov" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Нотўғри сўров" }, { status: 400 });
   }
 
   // Bot himoyasi: yashirin maydon to'ldirilgan bo'lsa — jim muvaffaqiyat.
@@ -27,10 +27,10 @@ export async function POST(req: NextRequest) {
   const digits = clean(body.phone, 30).replace(/\D/g, "");
   const phone = digits.length === 9 ? `998${digits}` : digits;
 
-  if (name.length < 2) return NextResponse.json({ ok: false, error: "Ismingizni kiriting" }, { status: 400 });
+  if (name.length < 2) return NextResponse.json({ ok: false, error: "Исмингизни киритинг" }, { status: 400 });
   if (!/^998\d{9}$/.test(phone))
-    return NextResponse.json({ ok: false, error: "Telefon raqamni to'liq kiriting" }, { status: 400 });
-  if (address.length < 2) return NextResponse.json({ ok: false, error: "Manzilni kiriting" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Телефон рақамни тўлиқ киритинг" }, { status: 400 });
+  if (address.length < 2) return NextResponse.json({ ok: false, error: "Манзилни киритинг" }, { status: 400 });
 
   const eventId = clean(body.eventId, 64) || `lead_${randomUUID()}`;
   const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || req.headers.get("x-real-ip") || "";
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
   const ids = chatIds();
   if (!process.env.TELEGRAM_BOT_TOKEN || ids.length === 0) {
     console.error("[lead] TELEGRAM_BOT_TOKEN yoki TELEGRAM_CHAT_ID sozlanmagan", { ...lead, phone: formatPhone(phone) });
-    return NextResponse.json({ ok: false, error: "Server sozlanmagan" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "Сервер созланмаган" }, { status: 500 });
   }
 
   const text = buildLeadMessage({ ...lead, phone: formatPhone(phone) });
@@ -111,6 +111,6 @@ export async function POST(req: NextRequest) {
   tgResults.forEach((r) => r.status === "rejected" && console.error("[lead] telegram", r.reason));
   if (!meta.ok) console.warn("[lead] meta", meta.error);
 
-  if (!delivered) return NextResponse.json({ ok: false, error: "Yuborib bo'lmadi, qayta urinib ko'ring" }, { status: 502 });
+  if (!delivered) return NextResponse.json({ ok: false, error: "Юбориб бўлмади, қайта уриниб кўринг" }, { status: 502 });
   return NextResponse.json({ ok: true });
 }

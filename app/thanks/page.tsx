@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Countdown from "./Countdown";
 
-export const metadata: Metadata = { title: "Rahmat!", robots: { index: false } };
+export const metadata: Metadata = { title: "Раҳмат!", robots: { index: false } };
 
 // Forma yuborilgandan so'ng shu sahifa ochiladi, 10 soniyadan keyin Telegram lichkaga o'tadi.
 export default async function ThanksPage({ searchParams }: { searchParams: Promise<{ name?: string }> }) {
@@ -12,10 +12,10 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
     <main className="thanks-page">
       <div className="thanks-card">
         <div className="done-icon thanks-check" aria-hidden>✓</div>
-        <p className="eyebrow">Ariza qabul qilindi</p>
-        <h1>Rahmat{first ? `, ${first}` : ""}!</h1>
+        <p className="eyebrow">Ариза қабул қилинди</p>
+        <h1>Раҳмат{first ? `, ${first}` : ""}!</h1>
         <p className="thanks-text">
-          Buyurtmangizni tasdiqlash uchun Telegramga o&apos;tasiz — mutaxassisimiz sizga mos asalni tanlab beradi.
+          Буюртмангизни тасдиқлаш учун Телеграмга ўтасиз — мутахассисимиз сизга мос асални танлаб беради.
         </p>
         <Countdown seconds={10} />
       </div>

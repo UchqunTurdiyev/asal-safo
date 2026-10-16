@@ -33,9 +33,9 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
     e.preventDefault();
     setError("");
     const digits = phone.replace(/\D/g, "");
-    if (name.trim().length < 2) return setError("Ismingizni kiriting");
-    if (digits.length !== 12) return setError("Telefon raqamni to'liq kiriting");
-    if (address.trim().length < 2) return setError("Manzilingizni kiriting");
+    if (name.trim().length < 2) return setError("Исмингизни киритинг");
+    if (digits.length !== 12) return setError("Телефон рақамни тўлиқ киритинг");
+    if (address.trim().length < 2) return setError("Манзилингизни киритинг");
 
     setStatus("sending");
     const eventId = newEventId();
@@ -57,7 +57,7 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
         }),
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || !json.ok) throw new Error(json.error || "Xatolik yuz berdi");
+      if (!res.ok || !json.ok) throw new Error(json.error || "Хатолик юз берди");
 
       // Pixel + CAPI bir xil eventID bilan — Meta takrorni o'zi olib tashlaydi.
       track("Lead", { content_name: "Safo Asallari ariza" }, eventId);
@@ -65,7 +65,7 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
       router.push(`/thanks?name=${encodeURIComponent(name.trim())}`);
     } catch (err) {
       setStatus("idle");
-      setError(err instanceof Error ? err.message : "Xatolik yuz berdi");
+      setError(err instanceof Error ? err.message : "Хатолик юз берди");
     }
   }
 
@@ -73,19 +73,19 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
     <form className={`lead-form ${compact ? "compact" : ""}`} id={id} onSubmit={onSubmit} noValidate>
       {!compact && (
         <div className="form-head">
-          <span className="pill pill-hot">Bugungi taklif</span>
-          <h3>Asal buyurtma qiling</h3>
-          <p>Ariza qoldiring — 15 daqiqada aloqaga chiqamiz</p>
+          <span className="pill pill-hot">Бугунги таклиф</span>
+          <h3>Асал буюртма қилинг</h3>
+          <p>Ариза қолдиринг — тез орада асал соҳасидаги мутахассисимиз сиз билан боғланади</p>
         </div>
       )}
 
       <label className="field">
-        <span>Ismingiz</span>
+        <span>Исмингиз</span>
         <input
           type="text"
           name="name"
           autoComplete="name"
-          placeholder="Masalan: Dilnoza"
+          placeholder="Масалан: Дилноза"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -93,7 +93,7 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
       </label>
 
       <label className="field">
-        <span>Telefon raqamingiz</span>
+        <span>Телефон рақамингиз</span>
         <input
           type="tel"
           name="phone"
@@ -107,12 +107,12 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
       </label>
 
       <label className="field">
-        <span>Manzilingiz</span>
+        <span>Манзилингиз</span>
         <input
           type="text"
           name="address"
           autoComplete="street-address"
-          placeholder="Shahar / tuman, ko'cha"
+          placeholder="Шаҳар / туман, кўча"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           required
@@ -129,7 +129,7 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
       )}
 
       <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? <span className="spinner" aria-label="Yuborilmoqda" /> : "Yuborish"}
+        {status === "sending" ? <span className="spinner" aria-label="Юборилмоқда" /> : "Юбориш"}
       </button>
 
       <p className="form-note">
@@ -139,7 +139,7 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
             d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4Zm-1.2 15.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3Z"
           />
         </svg>
-        Ma&apos;lumotlaringiz faqat buyurtma uchun ishlatiladi
+        Маълумотларингиз фақат буюртма учун ишлатилади
       </p>
     </form>
   );

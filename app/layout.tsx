@@ -9,12 +9,12 @@ const serif = Playfair_Display({ subsets: ["latin", "cyrillic"], variable: "--fo
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: "Safo Asallari — 100% tabiiy, shifobaxsh asal | O'zbekiston bo'ylab yetkazib berish",
+  title: "Сафо Асаллари — 100% табиий, шифобахш асал | Ўзбекистон бўйлаб етказиб бериш",
   description:
-    "Tog' asali, gul asali va noyob asal turlari. Shakar va qo'shimchasiz, sifat kafolati bilan. Butun O'zbekiston bo'ylab yetkazib beramiz — ariza qoldiring.",
+    "Тоғ асали, гул асали ва ноёб асал турлари. Шакар ва қўшимчасиз, сифат кафолати билан. Бутун Ўзбекистон бўйлаб етказиб берамиз — ариза қолдиринг.",
   openGraph: {
-    title: "Safo Asallari — 100% tabiiy asal",
-    description: "Shifobaxsh va noyob asallar. Sifat kafolati. O'zbekiston bo'ylab yetkazib berish.",
+    title: "Сафо Асаллари — 100% табиий асал",
+    description: "Шифобахш ва ноёб асаллар. Сифат кафолати. Ўзбекистон бўйлаб етказиб бериш.",
     type: "website",
     locale: "uz_UZ",
   },
@@ -24,7 +24,7 @@ export const viewport: Viewport = { themeColor: "#1F1408", viewportFit: "cover" 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uz" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="uz-Cyrl" className={`${sans.variable} ${serif.variable}`}>
       <body>
         {children}
         <MetaPixel />
