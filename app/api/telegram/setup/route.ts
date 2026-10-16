@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { tg } from "@/lib/telegram";
-import { site } from "@/lib/site";
+import { baseUrl } from "@/lib/leadToken";
 
 export const runtime = "nodejs";
 
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "key noto'g'ri yoki TELEGRAM_WEBHOOK_SECRET sozlanmagan" }, { status: 401 });
   }
 
-  const url = `${site.url.replace(/\/$/, "")}/api/telegram/webhook`;
+  const url = `${baseUrl(req)}/api/telegram/webhook`;
   try {
     await tg("setWebhook", { url, secret_token: secret, allowed_updates: ["callback_query"] });
     const info = await tg("getWebhookInfo", {});
