@@ -1,8 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { getCookie, getFbc, track } from "./MetaPixel";
-import { telegramLink } from "@/lib/site";
 
 // +998 (90) 123-45-67 ko'rinishidagi niqob
 function maskPhone(value: string) {
@@ -25,7 +25,8 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+998");
   const [address, setAddress] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [error, setError] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -60,28 +61,12 @@ export default function LeadForm({ id, compact = false }: { id?: string; compact
 
       // Pixel + CAPI bir xil eventID bilan — Meta takrorni o'zi olib tashlaydi.
       track("Lead", { content_name: "Safo Asallari ariza" }, eventId);
-      setStatus("done");
-      // Pixel so'rovi chiqib ulgurishi uchun qisqa pauza, so'ng Telegram lichkaga.
-      setTimeout(() => {
-        window.location.href = telegramLink;
-      }, 900);
+      // Rahmat sahifasi — u yerdan 10 soniyadan so'ng Telegram lichkaga o'tiladi.
+      router.push(`/thanks?name=${encodeURIComponent(name.trim())}`);
     } catch (err) {
       setStatus("idle");
       setError(err instanceof Error ? err.message : "Xatolik yuz berdi");
     }
-  }
-
-  if (status === "done") {
-    return (
-      <div className={`lead-form lead-done ${compact ? "compact" : ""}`} id={id}>
-        <div className="done-icon" aria-hidden>✓</div>
-        <h3>Rahmat, {name.split(" ")[0]}!</h3>
-        <p>Arizangiz qabul qilindi. Hozir Telegramga o&apos;tasiz — u yerda buyurtmani tasdiqlaymiz.</p>
-        <a className="btn btn-primary" href={telegramLink}>
-          Telegramni ochish
-        </a>
-      </div>
-    );
   }
 
   return (

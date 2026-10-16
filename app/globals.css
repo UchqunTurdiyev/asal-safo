@@ -861,6 +861,128 @@ a {
   margin-bottom: 8px;
 }
 
+/* ===== Rahmat sahifasi ===== */
+.thanks-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: radial-gradient(circle at 50% 0%, var(--dark-2), var(--dark) 70%);
+}
+
+.thanks-card {
+  background: var(--white);
+  border-radius: 28px;
+  padding: 40px 28px 32px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow);
+  animation: thanks-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.thanks-card h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.thanks-check {
+  margin-bottom: 10px;
+  animation: thanks-pop 0.5s 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+.thanks-text {
+  color: var(--ink-soft);
+  margin: 6px 0 18px;
+}
+
+.countdown {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.countdown-ring {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+
+.countdown-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.countdown-ring circle {
+  fill: none;
+  stroke-width: 9;
+}
+
+.ring-track {
+  stroke: var(--cream);
+}
+
+.ring-progress {
+  stroke: var(--gold);
+  stroke-linecap: round;
+  stroke-dashoffset: 0;
+  animation-name: ring-drain;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0 4px 8px rgba(242, 166, 43, 0.45));
+}
+
+.countdown-num {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 800 46px/1 var(--font-serif);
+  color: var(--ink);
+  animation: num-tick 0.45s ease-out;
+}
+
+.countdown-note {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+@keyframes ring-drain {
+  to {
+    stroke-dashoffset: var(--circ);
+  }
+}
+
+@keyframes num-tick {
+  from {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes thanks-in {
+  from {
+    transform: translateY(24px) scale(0.96);
+    opacity: 0;
+  }
+}
+
+@keyframes thanks-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
 /* ===== Moslashuvchanlik ===== */
 @media (max-width: 1080px) {
   .hero-jar {
