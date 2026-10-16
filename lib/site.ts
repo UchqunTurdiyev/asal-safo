@@ -3,7 +3,7 @@
 export const site = {
   name: "Сафо Асаллари",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  phone: process.env.NEXT_PUBLIC_PHONE || "+998901234567",
+  phone: process.env.NEXT_PUBLIC_PHONE || "+998901383311",
   telegram: process.env.NEXT_PUBLIC_TELEGRAM_USERNAME || "Safoasallari",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM || "safo.asallari",
 };
