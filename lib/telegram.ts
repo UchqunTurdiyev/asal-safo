@@ -81,22 +81,18 @@ export function parseLeadMessage(text: string): LeadMeta | null {
   };
 }
 
-export function leadKeyboard(siteUrl: string, phone: string, purchased = false) {
+// purchaseUrl — "Sotib oldi" tugmasi ochadigan summa kiritish sahifasi (/sotuv?t=...).
+// URL tugma webhook'siz ishlaydi (callback tugma webhook o'rnatilmasa "loading"da qolib ketadi).
+export function leadKeyboard(siteUrl: string, phone: string, purchased = false, purchaseUrl?: string) {
   const digits = phone.replace(/\D/g, "");
   // Telegram inline tugmalarida tel: havolasi ishlamaydi, shuning uchun /call sahifasi orqali.
-  // Telegram localhost havolalarini qabul qilmaydi — lokal testda bu tugma chiqmaydi
-  // (raqamning o'zi xabarda bosiladigan bo'ladi).
+  // Telegram localhost havolalarini qabul qilmaydi — lokal testda URL tugmalar chiqmaydi.
   const isPublic = /^https:\/\//.test(siteUrl) && !/localhost|127\.0\.0\.1/.test(siteUrl);
-  return {
-    inline_keyboard: [
-      ...(isPublic
-        ? [[{ text: "📞 Qo'ng'iroq qilish", url: `${siteUrl.replace(/\/$/, "")}/call?n=${digits}` }]]
-        : []),
-      [
-        purchased
-          ? { text: "✅ Sotib oldi — Metaga yuborilgan", callback_data: "noop" }
-          : { text: "💰 Sotib oldi → Metaga yuborish", callback_data: "purchase" },
-      ],
-    ],
-  };
+  const rows: Record<string, string>[][] = [];
+  if (isPublic) rows.push([{ text: "📞 Qo'ng'iroq qilish", url: `${siteUrl.replace(/\/$/, "")}/call?n=${digits}` }]);
+  // Sotilgandan keyin "Sotib oldi" tugmasi olib tashlanadi (qayta yuborilmasin), javob xabari qoladi
+  if (purchased) return { inline_keyboard: rows };
+  if (purchaseUrl && isPublic) rows.push([{ text: "💰 Sotib oldi → summa kiritish", url: purchaseUrl }]);
+  else rows.push([{ text: "💰 Sotib oldi → Metaga yuborish", callback_data: "purchase" }]);
+  return { inline_keyboard: rows };
 }

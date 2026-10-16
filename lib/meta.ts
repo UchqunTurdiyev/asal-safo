@@ -22,11 +22,12 @@ export type MetaEvent = {
   eventId: string;
   eventTime?: number; // unix soniya
   sourceUrl?: string;
-  user: MetaUser;
+  user?: MetaUser;
+  userData?: Record<string, unknown>; // oldindan heshlangan user_data (sotuv linkidan)
   customData?: Record<string, unknown>;
 };
 
-function buildUserData(u: MetaUser) {
+export function buildUserData(u: MetaUser) {
   const data: Record<string, unknown> = { country: [sha256("uz")] };
 
   const phone = u.phone?.replace(/\D/g, "");
@@ -57,7 +58,7 @@ export async function sendMetaEvent(ev: MetaEvent): Promise<{ ok: boolean; error
         event_id: ev.eventId,
         action_source: "website",
         event_source_url: ev.sourceUrl,
-        user_data: buildUserData(ev.user),
+        user_data: ev.userData ?? buildUserData(ev.user ?? {}),
         custom_data: ev.customData,
       },
     ],
@@ -72,6 +73,11 @@ export async function sendMetaEvent(ev: MetaEvent): Promise<{ ok: boolean; error
     if (!res.ok) {
       const text = await res.text();
       console.error("[meta capi]", res.status, text);
+      // Meta xatosini tushunarli qilib qaytaramiz
+      try {
+        const j = JSON.parse(text);
+        if (j?.error?.message) return { ok: false, error: `Meta: ${j.error.error_user_msg || j.error.message}` };
+      } catch {}
       return { ok: false, error: `Meta ${res.status}: ${text.slice(0, 200)}` };
     }
     return { ok: true };
