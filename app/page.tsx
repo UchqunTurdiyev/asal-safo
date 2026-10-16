@@ -6,6 +6,9 @@ import {
   faq,
   formatPhone,
   instagramLink,
+  location,
+  mapEmbed,
+  mapLink,
   phoneHref,
   site,
   steps,
@@ -65,12 +68,6 @@ export default function Home() {
                   <Icon name="check" size={20} />
                   <span>
                     <b>Кафолат:</b> табиий бўлмаса — пулингизни тўлиқ қайтарамиз
-                  </span>
-                </li>
-                <li>
-                  <Icon name="check" size={20} />
-                  <span>
-                    <b>Кўриб тўлайсиз:</b> аввал асални татиб кўринг
                   </span>
                 </li>
                 <li>
@@ -223,6 +220,37 @@ export default function Home() {
               </div>
             </div>
             <LeadForm compact />
+          </div>
+        </section>
+
+        {/* ===== MANZIL VA XARITA ===== */}
+        <section className="section section-cream location" id="manzil">
+          <div className="container location-grid">
+            <div className="location-info">
+              <span className="eyebrow">Манзил</span>
+              <h2>Бизни топинг</h2>
+              <p className="location-address">
+                <Icon name="pin" size={22} />
+                <span>{location.address}</span>
+              </p>
+              <div className="location-actions">
+                <a href={mapLink} className="btn btn-primary" target="_blank" rel="noopener">
+                  <Icon name="pin" size={18} /> Харитада очиш
+                </a>
+                <a href={phoneHref} className="btn btn-ghost">
+                  <Icon name="phone" size={18} /> {phoneLabel}
+                </a>
+              </div>
+            </div>
+            <div className="location-map">
+              <iframe
+                src={mapEmbed}
+                title={`Харита: ${location.address}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
           </div>
         </section>
       </main>

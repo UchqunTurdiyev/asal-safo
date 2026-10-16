@@ -8,6 +8,15 @@ export const site = {
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM || "safo.asallari",
 };
 
+// Do'kon manzili (footer tepasidagi xarita uchun)
+export const location = {
+  address: "Тошкент шаҳар, Олмазор тумани, Мевазор масжиди олдида",
+  lat: 41.344432,
+  lng: 69.251716,
+};
+export const mapLink = `https://maps.google.com/maps?q=${location.lat},${location.lng}`;
+export const mapEmbed = `https://maps.google.com/maps?q=${location.lat},${location.lng}&z=16&hl=uz&output=embed`;
+
 export const telegramLink = `https://t.me/${site.telegram}`;
 export const instagramLink = `https://www.instagram.com/${site.instagram}/`;
 export const phoneHref = `tel:${site.phone.replace(/[^\d+]/g, "")}`;
