@@ -23,7 +23,10 @@ npm run dev                  # http://localhost:3000
 | `NEXT_PUBLIC_META_PIXEL_ID` | Events Manager → Pixel ID |
 | `META_CAPI_ACCESS_TOKEN` | Events Manager → Settings → Conversions API → Generate access token |
 | `META_TEST_EVENT_CODE` | Test paytida "Test events" kodi; prodda bo'sh |
-| `META_PURCHASE_VALUE` / `META_CURRENCY` | "Sotib oldi" bosilganda yuboriladigan summa (standart 250000 UZS) |
+| `META_PURCHASE_VALUE` | Sotuv sahifasidagi summa maydonining boshlang'ich qiymati (ixtiyoriy) |
+| `META_CURRENCY` | Valyuta (standart `UZS`) |
+| `SALES_PIN` | Ixtiyoriy: sotuv sahifasida PIN so'rash |
+| `LEAD_TOKEN_SECRET` | Ixtiyoriy: link shifrlash kaliti (bo'lmasa bot tokenidan olinadi) |
 
 **Chat ID ni bilish:** botga (yoki bot qo'shilgan guruhga) biror xabar yozing va
 `https://api.telegram.org/bot<TOKEN>/getUpdates` ni oching — `chat.id` ni oling.
@@ -41,9 +44,12 @@ npm run dev                  # http://localhost:3000
 2. `/api/lead` → Telegram botga lid xabari keladi, ikkita tugma bilan:
    - **📞 Qo'ng'iroq qilish** — `/call?n=...` sahifasi ochilib, raqam darhol teriladi
      (Telegram tugmalari `tel:` ni to'g'ridan-to'g'ri qo'llamaydi). Xabardagi raqamning o'zi ham bosiladi.
-   - **💰 Sotib oldi → Metaga yuborish** — mijoz xarid qilgach bosiladi; server Meta CAPI ga
-     `Purchase` hodisasini yuboradi (hash qilingan telefon, ism, fbp/fbc, IP, UA bilan).
-     Bosilgach tugma "✅ yuborilgan" holatiga o'tadi, qayta yuborilmaydi.
+   - **💰 Sotib oldi → summa kiritish** — mijoz to'lov qilgach bosiladi. `/sotuv` sahifasi ochiladi:
+     sotuvchi **to'langan summani** (va ismini) kiritadi → server Meta CAPI ga `Purchase { value, currency }`
+     yuboradi (heshlangan telefon/ism/external_id + fbp/fbc, IP, UA). Shunda Metada **Purchase va ROAS** ishlaydi.
+     Tugma ichidagi link AES-256-GCM bilan shifrlangan — kalitsiz o'qib/o'zgartirib bo'lmaydi.
+     Yuborilgach tugma o'chadi va xabarga "✅ Sotib oldi — 350 000 UZS" javobi tushadi.
+     Bu tugma **webhook talab qilmaydi**.
 3. Bir vaqtda Meta ga `Lead` hodisasi ikki yo'l bilan ketadi: brauzer Pixel va server CAPI —
    bir xil `event_id` bilan, Meta ularni bitta hodisa deb hisoblaydi (deduplikatsiya).
 4. Mijoz avtomatik ravishda Telegram lichkaga (`t.me/Safoasallari`) yo'naltiriladi.
