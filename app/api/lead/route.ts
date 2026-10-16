@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { sendMetaEvent } from "@/lib/meta";
 import { buildLeadMessage, chatIds, leadKeyboard, tg, type LeadMeta } from "@/lib/telegram";
-import { formatPhone, site } from "@/lib/site";
+import { formatPhone } from "@/lib/site";
+import { baseUrl, makeLeadToken } from "@/lib/leadToken";
 
 export const runtime = "nodejs";
 
@@ -40,7 +41,7 @@ export async function POST(req: NextRequest) {
     phone: `+${phone}`,
     address,
     t: Math.floor(Date.now() / 1000),
-    url: clean(body.url, 300) || site.url,
+    url: clean(body.url, 300) || baseUrl(req),
     ip,
     ua: (req.headers.get("user-agent") || "").slice(0, 300),
     fbp: clean(body.fbp, 120),
@@ -54,25 +55,55 @@ export async function POST(req: NextRequest) {
   }
 
   const text = buildLeadMessage({ ...lead, phone: formatPhone(phone) });
+  const siteUrl = baseUrl(req);
+  const metaUser = { phone, name, externalId: phone, ip, userAgent: lead.ua, fbp: lead.fbp, fbc: lead.fbc };
+
+  // Har bir chatga: xabar → "Sotib oldi" tugmasi (ichida shu xabar ID'si bilan shifrlangan link)
+  const sendToChat = async (chat_id: string) => {
+    const msg = await tg<{ message_id: number; chat: { id: number } }>("sendMessage", {
+      chat_id,
+      text,
+      parse_mode: "HTML",
+      link_preview_options: { is_disabled: true },
+      // Avval faqat "Qo'ng'iroq" tugmasi; "Sotib oldi" linki xabar ID'si ma'lum bo'lgach qo'shiladi
+      reply_markup: leadKeyboard(siteUrl, phone, true),
+    });
+    try {
+      const token = makeLeadToken({
+        id: lead.id,
+        t: lead.t,
+        url: lead.url,
+        user: metaUser,
+        name,
+        phone,
+        tg: { c: String(msg.chat.id), m: msg.message_id },
+      });
+      await tg("editMessageReplyMarkup", {
+        chat_id: msg.chat.id,
+        message_id: msg.message_id,
+        reply_markup: leadKeyboard(siteUrl, phone, false, `${siteUrl}/sotuv?t=${token}`),
+      });
+    } catch (e) {
+      console.error("[lead] sotib oldi tugmasi", e);
+      // Zaxira: eski callback tugma (webhook o'rnatilgan bo'lsa ishlaydi)
+      await tg("editMessageReplyMarkup", {
+        chat_id: msg.chat.id,
+        message_id: msg.message_id,
+        reply_markup: leadKeyboard(siteUrl, phone),
+      }).catch(() => {});
+    }
+    return msg;
+  };
+
   const [tgResults, meta] = await Promise.all([
-    Promise.allSettled(
-      ids.map((chat_id) =>
-        tg("sendMessage", {
-          chat_id,
-          text,
-          parse_mode: "HTML",
-          link_preview_options: { is_disabled: true },
-          reply_markup: leadKeyboard(site.url, phone),
-        }),
-      ),
-    ),
+    Promise.allSettled(ids.map(sendToChat)),
     // Brauzerdagi Pixel bilan bir xil eventId — Meta ikkalasini bitta hodisa deb hisoblaydi.
     sendMetaEvent({
       eventName: "Lead",
       eventId,
       eventTime: lead.t,
       sourceUrl: lead.url,
-      user: { phone, name, externalId: phone, ip, userAgent: lead.ua, fbp: lead.fbp, fbc: lead.fbc },
+      user: metaUser,
     }),
   ]);
 
